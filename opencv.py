@@ -27,6 +27,7 @@ known_face_encodings = [
     BiBi_face_encoding,
     Calvin_face_encoding
 ]
+
 known_face_names = [
     "KB",
     "BiBi",
@@ -81,12 +82,13 @@ while True:
 
             face_names.append(name)
 
-    process_this_frame = not process_this_frame
+#    process_this_frame = not process_this_frame
 
 
     # Display the results
-    # zip : 
-    for (top, right, bottom, left), name in zip(face_locations, face_names):
+    # zip: https://github.com/KBLin1996/Python_Practice/edit/master/basic_python.py 
+    for(top, right, bottom, left), name in zip(face_locations, face_names):
+
         # Scale back up face locations since the frame we detected in was scaled to 1/4 size
         top *= 4
         right *= 4
@@ -94,21 +96,23 @@ while True:
         left *= 4
 
         # Draw a box around the face
+        # 在這裡改顏色 -> if OK (green), else if Maybe (yellow), else Unknown (red)
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
         # Draw a label with a name below the face
+        # cv2.rectangle(frame, vertex's coordinate, diagonal's coordinate, line color, line breadth)
         cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
-        font = cv2.FONT_HERSHEY_DUPLEX
-        cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+
+        # cv2.putText(frame, test, coordinate, font, size, text color, text breadth, line options (optional))
+        cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
 
     # Display the resulting image
-    cv2.imshow('Video', frame)
+    cv2.imshow('Face Recognition', frame)
 
-    # Hit 'q' on the keyboard to quit!
+    # Hit 'q' on the keyboard to quit !
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 # Release handle to the webcam
 video_capture.release()
 cv2.destroyAllWindows()
-cv2.waitKey(10)
