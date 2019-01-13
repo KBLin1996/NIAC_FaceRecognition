@@ -8,4 +8,5 @@
 1. Create a directory called "Images" in the same path with "opencv.py" (Refer the following image)
 
 ![image](https://github.com/KBLin1996/NIAG_FaceRecognition/blob/master/Reference.png)
+
 2. 
