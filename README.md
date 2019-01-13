@@ -11,9 +11,9 @@
 
 2. Upload people that you want to recognize in "Images".
 
-3. 
+3. First, install "opencv" on your environment -> pip install opencv-contrib-python
 
-4.
+4. Then, install "face_recognition" on your environment -> pip install face_recognition
 
 5. After executing "opencv.py", the program will recognize people in "Images" with a maximum distance (tolerance) = 0.45.
    You can modify by increacing (looser) or decreasing (stricter) the value.
