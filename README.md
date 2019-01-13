@@ -10,3 +10,5 @@
 ![image](https://github.com/KBLin1996/NIAG_FaceRecognition/blob/master/Reference.png)
 
 2. Upload people that you want to recognize in "Images" 
+
+![image](https://github.com/KBLin1996/NIAG_FaceRecognition/blob/master/Recognize.png)
