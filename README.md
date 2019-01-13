@@ -18,6 +18,6 @@
 5. After executing "opencv.py", the program will recognize people in "Images" with a maximum distance (tolerance) = 0.45.
    You can modify by increacing (looser) or decreasing (stricter) the value.
   
-6. Execute "opencv.py", then basically you can recognize people in "Images" perfectly ! (Press Q the exit)
+6. Execute "opencv.py", then basically you can recognize people in "Images" perfectly !! (Refer the following image)
 
 ![image](https://github.com/KBLin1996/NIAG_FaceRecognition/blob/master/Recognize.png)
