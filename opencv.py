@@ -1,5 +1,6 @@
 import face_recognition
 import cv2
+import os
 
 # This is a demo of running face recognition on live video from your webcam. The most important is, it includes some basic performance tweaks to make things run a lot faster :
 #   1. Process each video frame at 1/4 resolution (though still display it at full resolution)
@@ -10,29 +11,19 @@ video_capture = cv2.VideoCapture(0)
 
 # Load a sample picture and learn how to recognize it.
 # face_recognition.load_image_file(file, mode='RGB') -> Loads an image file (.jpg, .png, etc) into a numpy array
-KB_image = face_recognition.load_image_file("KB.png")
-KB_face_encoding = face_recognition.face_encodings(KB_image)[0]
 
-# Load a second sample picture and learn how to recognize it.
-BiBi_image = face_recognition.load_image_file("BiBi.jpg")
-BiBi_face_encoding = face_recognition.face_encodings(BiBi_image)[0]
+Source = os.getcwd()
+known_face_encodings = []
+known_face_names = []
 
-# Load a sample picture and learn how to recognize it.
-Calvin_image = face_recognition.load_image_file("Calvin.jpg")
-Calvin_face_encoding = face_recognition.face_encodings(Calvin_image)[0]
-
-# Create arrays of known face encodings and their names
-known_face_encodings = [
-    KB_face_encoding,
-    BiBi_face_encoding,
-    Calvin_face_encoding
-]
-
-known_face_names = [
-    "KB",
-    "BiBi",
-    "Calvin"
-]
+for file in os.listdir(Source):
+    if file.endswith((".png", ".jpg")):
+        
+        file_image = face_recognition.load_image_file(file)
+        
+        # Create arrays of known face encodings and their names
+        known_face_encodings.append(face_recognition.face_encodings(file_image)[0])
+        known_face_names.append(file[:-4])
 
 # Initialize some variables
 face_locations = []
