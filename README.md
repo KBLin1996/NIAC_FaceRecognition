@@ -1,4 +1,4 @@
-# NIAC_FaceRecognition
+# NIAG_FaceRecognition
 
 **Description:** Face Recognition for National Intercollegiate Athletic Games
 
