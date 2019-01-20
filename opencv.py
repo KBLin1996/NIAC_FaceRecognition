@@ -16,7 +16,7 @@ video_capture = cv2.VideoCapture(0)
 # face_recognition.load_image_file(file, mode='RGB') -> Loads an image file (.jpg, .png, etc) into a numpy array
 
 Source = os.getcwd()
-Source = os.path.join(Source, "Image")
+Source = os.path.join(Source, "Images")
 known_face_encodings = []
 known_face_names = []
 
