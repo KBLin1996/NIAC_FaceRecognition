@@ -1,7 +1,10 @@
 import face_recognition
+import click
+import time
 import cv2
 import os
 
+Start = time.time() # Timer Started
 # This is a demo of running face recognition on live video from your webcam. The most important is, it includes some basic performance tweaks to make things run a lot faster :
 #   1. Process each video frame at 1/4 resolution (though still display it at full resolution)
 #   2. Only detect faces in every other frame of video.
@@ -13,16 +16,30 @@ video_capture = cv2.VideoCapture(0)
 # face_recognition.load_image_file(file, mode='RGB') -> Loads an image file (.jpg, .png, etc) into a numpy array
 
 Source = os.getcwd()
+Source = os.path.join(Source, "Image")
 known_face_encodings = []
 known_face_names = []
 
 for file in os.listdir(Source):
+    print(file)
     if file.endswith((".png", ".jpg")):
         
-        file_image = face_recognition.load_image_file(file)
+        file_path = os.path.join(Source, file)
+        file_image = face_recognition.load_image_file(file_path)
         
         # Create arrays of known face encodings and their names
+        encodings = face_recognition.face_encodings(file_image)
+        
+        if len(encodings) > 1:
+              click.echo("WARNING: More than one face found in the picture -> Ignoring file.".format(file))
+              continue
+
+        if len(encodings) == 0:
+              click.echo("WARNING: No face was found in the picture -> Ignoring file.".format(file))
+              continue
+        
         known_face_encodings.append(face_recognition.face_encodings(file_image)[0])
+
         known_face_names.append(file[:-4])
 
 # Initialize some variables
@@ -30,6 +47,10 @@ face_locations = []
 face_encodings = []
 face_names = []
 process_this_frame = True
+
+End = time.time() # Timer Ended
+
+click.echo("I/O Time (7830 pics): %f sec" % (End - Start))
 
 while True:
     # Grab a single frame of video
