@@ -19,11 +19,13 @@ Source = os.getcwd()
 Source = os.path.join(Source, "Images")
 known_face_encodings = []
 known_face_names = []
+cnt = 0
 
 for file in os.listdir(Source):
     print(file)
     if file.endswith((".png", ".jpg")):
-        
+        cnt += 1
+
         file_path = os.path.join(Source, file)
         file_image = face_recognition.load_image_file(file_path)
         
@@ -50,7 +52,7 @@ process_this_frame = True
 
 End = time.time() # Timer Ended
 
-click.echo("I/O Time (7830 pics): %f sec" % (End - Start))
+click.echo("I/O Time (%d pics): %f sec" % (cnt, (End - Start)))
 
 while True:
     # Grab a single frame of video
