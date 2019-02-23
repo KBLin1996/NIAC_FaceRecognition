@@ -1,6 +1,6 @@
 # OpenCV_FaceRecognition
 
-**Description:** Face Recognition (based in OpenCV), Face Detection -> Hog
+**Description:** Face Recognition (based in OpenCV),  Face Detection -> Hog
 
 **Reference:** https://github.com/ageitgey/face_recognition
 
