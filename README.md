@@ -1,6 +1,6 @@
-# NIAG_FaceRecognition
+# OpenCV_FaceRecognition
 
-**Description:** Face Recognition for National Intercollegiate Athletic Games
+**Description:** Face Recognition (based in OpenCV), Face Detection -> Hog
 
 **Reference:** https://github.com/ageitgey/face_recognition
 
