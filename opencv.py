@@ -59,7 +59,7 @@ while True:
     ret, frame = video_capture.read()
 
     # Resize frame of video to 1/4 size for faster face recognition processing
-    small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
+    small_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
 
     # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
     rgb_small_frame = small_frame[:, :, ::-1]
@@ -69,7 +69,7 @@ while True:
         # Find all the faces and face encodings in the current frame of video
 
         # Returns an array of bounding boxes of human faces in a image
-        face_locations = face_recognition.face_locations(rgb_small_frame)
+        face_locations = face_recognition.face_locations(rgb_small_frame, model="cnn")
 
         # Returns a list of 128-dimensional face encodings (one for each face in the image)
         face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations) # The second parameter is optional, means a bounding boxesof each face that we already know where it locates
@@ -80,14 +80,14 @@ while True:
 
             # See if the face is a match for the known face(s)
 
-            # face_recognition.compare_faces(known_face_encodings, face_encoding_to_check, tolerance=0.6)
+            # face_recognition.compare_faces(known_face_encodings, face_encoding_to_check, tolerance=0.45)
             #    1. known_face_encodings -> A list of known face encodings
             #    2. face_encoding_to_check -> A single face encoding to compare against the list
+            #    3. Tolorence = 0.45 is best for predicting Asian faces (since Asian faces are all similar for the model)
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding, tolerance=0.45)
             
             name = "Unknown"
 
-            # (從這裡改input讀取)
             # If a match was found in known_face_encodings, just use the first one.
             if True in matches:
                 # Return True value's index in match list
@@ -96,6 +96,7 @@ while True:
 
             face_names.append(name)
 
+     # Uncoomment the code to make the video seems smoother when the person moves; while Comment it will make it faster
 #    process_this_frame = not process_this_frame
 
 
@@ -104,13 +105,13 @@ while True:
     for(top, right, bottom, left), name in zip(face_locations, face_names):
 
         # Scale back up face locations since the frame we detected in was scaled to 1/4 size
-        top *= 4
-        right *= 4
-        bottom *= 4
-        left *= 4
+        top *= 2
+        right *= 2
+        bottom *= 2
+        left *= 2
 
-        # Draw a box around the face
-        # 在這裡改顏色 -> if OK (green), else if Maybe (yellow), else Unknown (red)
+        # Draw a box around the face, color -> (B,G,R)
+        # You can change color here -> if OK (green), else if Maybe (yellow), else Unknown (red)
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
         # Draw a label with a name below the face
